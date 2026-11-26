@@ -10,6 +10,32 @@ A robust, fully transparent mathematical expression processing and evaluation sy
 
 ---
 
+## 🖥️ Interactive React Interface
+
+`react-app/` contains a full browser version of the observatory built with React,
+TypeScript, Tailwind CSS, and Framer Motion. It shares the same evaluation model
+as the Python engine and adds a scrubbable, animated trace:
+
+- Animated shunting-yard stage with the input stream, operator stack, and postfix queue.
+- Animated SVG expression tree with intermediate values beside every operator and a copyable ASCII view.
+- Playback controls: reset, step back, play/pause, step forward, scrubber, and 1×/2× speed.
+- Inline variable ledger, preset specimens, and diagnostics that mark the offending token.
+- Built-in verification suite that runs the same cases as the engine CLI.
+
+```bash
+cd react-app
+npm install
+npm run dev        # open the printed local URL, usually http://localhost:5173
+npm run build
+npm run engine:check
+```
+
+The Python implementation below is unchanged and still runs from the repository
+root. See [`react-app/README.md`](react-app/README.md) for the engine
+architecture and interface notes.
+
+---
+
 ## 🚀 Key Features & Capabilities
 
 - **Supported Operators**:
@@ -33,6 +59,7 @@ A robust, fully transparent mathematical expression processing and evaluation sy
   - **Rich CLI**: Formatted tables, trees, and panels via `observatory_cli.py`.
   - **Interactive REPL**: Variable assignment (`let a = 10`), formula calculation, and real-time trace inspection.
   - **Zero-Dependency Web GUI**: Beautiful browser interface running on standard library `http.server`.
+  - **React Interface**: Animated, step-through visualizer in `react-app/` with Vite, TypeScript, Tailwind CSS, and Framer Motion.
 
 ---
 

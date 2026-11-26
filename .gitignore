@@ -221,3 +221,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# React interface (react-app/)
+node_modules/
+react-app/dist/
+*.tsbuildinfo
+.vite/
