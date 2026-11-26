@@ -1,0 +1,205 @@
+@import "@fontsource/newsreader/latin-400.css";
+@import "@fontsource/newsreader/latin-400-italic.css";
+@import "@fontsource/newsreader/latin-500.css";
+@import "@fontsource/newsreader/latin-600.css";
+@import "@fontsource/instrument-sans/latin-400.css";
+@import "@fontsource/instrument-sans/latin-500.css";
+@import "@fontsource/instrument-sans/latin-600.css";
+@import "@fontsource/jetbrains-mono/latin-400.css";
+@import "@fontsource/jetbrains-mono/latin-500.css";
+@import "@fontsource/jetbrains-mono/latin-600.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background-color: #dce8e2;
+    color: #12211c;
+    font-family: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    opacity: 0.024;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.72'/%3E%3C/svg%3E");
+  }
+
+  ::selection {
+    background: rgba(196, 117, 33, 0.2);
+    color: #12211c;
+  }
+
+  button,
+  input {
+    font: inherit;
+  }
+
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+
+  *:focus-visible {
+    outline: none;
+  }
+}
+
+@layer components {
+  .formula-editor {
+    text-indent: 0;
+  }
+
+  .scrubber {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 22px;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .scrubber:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+
+  .scrubber::-webkit-slider-runnable-track {
+    height: 2px;
+    border: 0;
+    background: linear-gradient(
+      to right,
+      #c47521 0%,
+      #c47521 var(--scrub-progress, 0%),
+      #b7cbc2 var(--scrub-progress, 0%),
+      #b7cbc2 100%
+    );
+  }
+
+  .scrubber::-moz-range-track {
+    height: 2px;
+    border: 0;
+    background: #b7cbc2;
+  }
+
+  .scrubber::-moz-range-progress {
+    height: 2px;
+    background: #c47521;
+  }
+
+  .scrubber::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 11px;
+    height: 11px;
+    margin-top: -4.5px;
+    border: 1px solid #1f4854;
+    border-radius: 999px;
+    background: #f5f9f5;
+    transition: transform 150ms ease;
+  }
+
+  .scrubber::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    border: 1px solid #1f4854;
+    border-radius: 999px;
+    background: #f5f9f5;
+  }
+
+  .scrubber:hover::-webkit-slider-thumb,
+  .scrubber:focus-visible::-webkit-slider-thumb {
+    transform: scale(1.2);
+  }
+
+  .ledger-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #aec4b9 transparent;
+  }
+
+  .ledger-scroll::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .ledger-scroll::-webkit-scrollbar-thumb {
+    background: #aec4b9;
+  }
+
+  .tree-node {
+    transition:
+      fill 260ms ease,
+      stroke 260ms ease;
+  }
+
+  .tree-edge-active {
+    stroke-dasharray: 1.5 6.5;
+    stroke-linecap: round;
+    animation: edge-flow 1.6s linear infinite;
+  }
+
+  .stage-enter {
+    animation: soft-blink 3.4s ease-in-out infinite;
+  }
+
+  .quiet-link {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 100% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+  }
+}
+
+@keyframes edge-flow {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+
+@keyframes soft-blink {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
